@@ -1,0 +1,265 @@
+--[[
+   ___             _         __    ______  ______ 
+  / _ \_______    (_)__ ____/ /_  / __/  |/  / _ \
+ / ___/ __/ _ \  / / -_) __/ __/ _\ \/ /|_/ / ___/
+/_/  /_/  \___/_/ /\__/\__/\__/ /___/_/  /_/_/    
+             |___/                                                               
+ --]]
+-- ProjectSMPⒸ, Copyrighted Item, Changing this item will let us taking action on you.
+-- Leak = PRO
+-- wyd here????
+-- psu deobfuscator be like 
+-- discord.gg/vYdJY6ggsx (dm us if u leak it)
+-- hi astolfo
+
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
+local Window = Library.CreateLib("Project ShitMyPants (Town Script) | OP", "Serpent")
+
+game.StarterGui:SetCore("ChatMakeSystemMessage", {
+    Text = "ProjectShitMyPants Loaded!";
+    Font = Enum.Font.Cartoon;
+    Color = Color3.new(255, 0, 0);
+    FontSize = Enum.FontSize.Size96;
+
+})
+
+game.StarterGui:SetCore("ChatMakeSystemMessage", {
+    Text = "discord.gg/vYdJY6ggsx";
+    Font = Enum.Font.Cartoon;
+    Color = Color3.new(255, 0, 0);
+    FontSize = Enum.FontSize.Size96;
+
+})
+
+
+
+local Tab = Window:NewTab("CREDITS")
+local Section = Tab:NewSection("CREDITS")
+local oldList = {
+  "Updates:",
+  "[+] AimLock",
+  "[+] Bypass Speed (V2 & V1)",
+  "[+] Noclip",
+  "[+] Force Reset"
+}
+local newList = {
+  "PSMP ON TOP",
+  "Created by Empire#4946"
+}
+local dropdown = Section:NewDropdown("Credits and Updates","Yes", oldList, function()
+
+end)
+Section:NewButton("Goto Credits", "Refreshes Dropdown", function()
+  dropdown:Refresh(newList)
+end)
+Section:NewButton("Goto Updates", "Refreshes Dropdown", function()
+  dropdown:Refresh(oldList)
+end)
+
+local Tab = Window:NewTab("Main")
+local Section = Tab:NewSection("+--- Main ---+")
+Section:NewButton("AimBot", "Aimbot go Brrr!", function()
+   loadstring(game:HttpGet("https://pastebin.com/raw/Dj9yPvG9"))()
+end)
+
+local Tab = Window:NewTab("Player")
+local Section = Tab:NewSection("+--- Player ---+")
+Section:NewSlider("Bypass Speed (Z)", "Sonic Speed.", 1000, 16, function(s)
+   plr = game:GetService('Players').LocalPlayer
+
+down = true
+
+function onButton1Down(mouse)
+
+    down = true
+
+    while down do
+
+        if not down then break end
+
+        local char = plr.Character
+
+        char.HumanoidRootPart.Velocity = char.HumanoidRootPart.CFrame.lookVector * s
+
+        wait()
+
+    end
+
+end
+
+function onButton1Up(mouse)
+
+    down = false
+
+end
+
+function onSelected(mouse)
+
+    mouse.KeyDown:connect(function(c) if c:lower()=="z"then onButton1Down(mouse)end end)
+
+    mouse.KeyUp:connect(function(c) if c:lower()=="z"then onButton1Up(mouse)end end)
+
+end
+
+onSelected(game.Players.LocalPlayer:GetMouse())
+end)
+Section:NewButton("Bypass Speed V2 (G) [3 dots]", "If you die you have to do it again", function()
+
+local plr = game:GetService("Players").LocalPlayer
+local char = plr.Character
+local hum = char.Humanoid
+local cam = workspace.CurrentCamera
+local serv = game:GetService("UserInputService")
+local mouse = plr:GetMouse()
+
+--hum.JumpPower = 150
+
+running = false
+enabled = nil
+died = false
+
+
+if not workspace:FindFirstChild('speed hack enabled') then
+    enabled = Instance.new('BoolValue')
+    enabled.Name = 'speed hack enabled'
+    enabled.Value = true
+    enabled.Parent = workspace
+else
+    enabled = workspace['speed hack enabled']
+end
+
+------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+keydown = mouse.KeyDown:Connect(function(key)
+    if key == string.lower('w') then
+        running = true
+    end
+end)
+
+keyup = mouse.KeyUp:Connect(function(key)
+    if key == string.lower('w') then
+        running = false
+    end
+end)
+
+enabling = mouse.KeyDown:Connect(function(key)
+    if key == string.lower('g') then
+        if enabled.Value == true then
+            enabled.Value = false
+        else
+            enabled.Value = true
+        end
+    end
+end)
+
+------------------------------------------------------------------------------------------------------------------------------------------------
+
+hum.Died:Connect(function()
+	if keydown then keydown:Disconnect() end
+	if keyup then keyup:Disconnect() end
+	if enabling then enabling:Disconnect() end
+	died = true
+end)
+
+------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+while true do
+	if died == true then break end
+    if enabled.Value == true then
+        if running == true then
+            local root = char:FindFirstChild("HumanoidRootPart")
+            if root then
+                --root.CFrame = root.CFrame + (cam.CFrame + cam.CFrame.lookVector*1).lookVector * 2
+                root.CFrame = root.CFrame + Vector3.new(
+                    ((cam.CFrame + cam.CFrame.lookVector*1).lookVector * 1.5).X,
+                    0,
+                    ((cam.CFrame + cam.CFrame.lookVector*1).lookVector * 1.5).Z
+                )
+            end
+        end
+    end
+    wait()
+end
+end)
+
+Section:NewToggle("NoClip", "Walk on walls.", function(state)
+    if state then
+        local noclip = true char = game.Players.LocalPlayer.Character while true do if noclip == true then for _,v in pairs(char:children()) do pcall(function() if v.className == "Part" then v.CanCollide = false elseif v.ClassName == "Model" then v.Head.CanCollide = false end end) end end game:service("RunService").Stepped:wait() end
+    else
+        game.Players.LocalPlayer.Character.Torso:Destroy()
+        game.Players.LocalPlayer.Character.Humanoid:Destroy()
+    end
+end)
+Section:NewButton("Force Reset", "Force!", function()
+   game.Players.LocalPlayer.Character.Torso:Destroy()
+   game.Players.LocalPlayer.Character.Humanoid:Destroy()
+end)
+
+local Tab = Window:NewTab("Other")
+local Section = Tab:NewSection("+--- Other ---+")
+
+local Section = Tab:NewSection("+--- Kits ---+")
+Section:NewButton("Heavy Kit (3 Dots)", "After Click Paste on Chat.", function()
+   setclipboard("!setspawn MG+Heavy+Red+Acog G3+Ergo+Flashlight+Coyote+Heavy L9+Angled+Heavy+Red+CL NV Medkit")
+end)
+Section:NewButton("Scout Kit (3 Dots)", "After Click Paste on Chat.", function()
+   setclipboard("!setspawn HK416+EO+Red+Sup+Angled Remington+Eo+Ergo L9+Angled+Heavy+Red+CL Makarov Fire NV Medkit")
+end)
+
+local Section = Tab:NewSection("+--- Armor ---+")
+Section:NewButton("RIOT ARMOR (3 Dots)", "After Click Paste on Chat.", function()
+   setclipboard("!sa RIOT")
+end)
+Section:NewButton("SWAT ARMOR (3 Dots)", "After Click Paste on Chat.", function()
+   setclipboard("!sa SWAT")
+end)
+Section:NewButton("FBI ARMOR (3 Dots)", "After Click Paste on Chat.", function()
+   setclipboard("!sa FBI")
+end)
+Section:NewButton("COM ARMOR (3 Dots)", "After Click Paste on Chat.", function()
+   setclipboard("!sa COM")
+end)
+Section:NewButton("GRU ARMOR (3 Dots)", "After Click Paste on Chat.", function()
+   setclipboard("!sa GRU")
+end)
+Section:NewButton("HCS ARMOR (3 Dots)", "After Click Paste on Chat.", function()
+   setclipboard("!sa HCS")
+end)
+Section:NewButton("RGF ARMOR (3 Dots)", "After Click Paste on Chat.", function()
+   setclipboard("!sa RGF")
+end)
+Section:NewButton("ROBES ARMOR (3 Dots)", "After Click Paste on Chat.", function()
+   setclipboard("!sa Robes")
+end)
+Section:NewButton("ROBES2 ARMOR (3 Dots)", "After Click Paste on Chat.", function()
+   setclipboard("!sa Robes2")
+end)
+Section:NewButton("SAS ARMOR (3 Dots)", "After Click Paste on Chat.", function()
+   setclipboard("!sa SAS")
+end)
+Section:NewButton("SLAV ARMOR (3 Dots)", "After Click Paste on Chat.", function()
+   setclipboard("!sa Slav")
+end)
+Section:NewButton("TENOR ARMOR (3 Dots)", "After Click Paste on Chat.", function()
+   setclipboard("!sa Tenor")
+end)
+Section:NewButton("VDV ARMOR (3 Dots)", "After Click Paste on Chat.", function()
+   setclipboard("!sa VDV")
+end)
+
+local Section = Tab:NewSection("--[Armor Gamepass]--")
+local Section = Tab:NewSection("! You need Gamepass to use this !")
+Section:NewButton("Rusky ARMOR (3 Dots)", "After Click Paste on Chat.", function()
+   setclipboard("!sa Rusky")
+end)
+
+local Tab = Window:NewTab("Settings")
+local Section = Tab:NewSection("+--- Modules ---+")
+Section:NewKeybind("OpenUI", "Keybind to Open UI", Enum.KeyCode.G, function()
+	Library:ToggleUI()
+end)
+Section:NewDropdown("Help", "", {"discord.gg/vYdJY6ggsx", "Join Discord For Support", "PSMP on TOP"}, function(currentOption)
+    print(currentOption)
+end)
